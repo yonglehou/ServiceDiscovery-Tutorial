@@ -61,15 +61,26 @@
   <ItemGroup>
     <Compile Include="Adapters\Configuration\HttpGatewayConfiguration.cs" />
     <Compile Include="Adapters\Gateways\HttpClientGateway.cs" />
+    <Compile Include="Adapters\Parsers\XmlRequestBuilder.cs" />
     <Compile Include="Adapters\Program\OrdersClientController.cs" />
     <Compile Include="Adapters\Program\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="RESTManualTests.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Orders-Core\Orders-Core.csproj">
+      <Project>{0b86762c-9322-44c7-9665-146237032d9a}</Project>
+      <Name>Orders-Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -5,21 +5,12 @@ namespace Orders_Client.Adapters.Configuration
 {
     class HttpGatewayConfiguration : ConfigurationSection
     {
-        [ConfigurationProperty("uri", DefaultValue = "http://localhost:3476/orders", IsRequired = true)]
-        public Uri Uri
+        [ConfigurationProperty("orderService")]
+        public OrderServiceConfiguration OrderServiceConfiguration
         {
-            get { return (Uri)this["uri"]; }
-            set { this["uri"] = value; }
+            get { return this["orderService"] as OrderServiceConfiguration; }
+            set { this["orderService"] = value; }
         }
-
-
-        [ConfigurationProperty("Timeout", DefaultValue = "500", IsRequired = true)]
-        public string Timeout
-        {
-            get { return this["Timeout"] as string; }
-            set { this["Timeout"] = value; }
-        }
-
 
         public static HttpGatewayConfiguration GetConfiguration()
         {
@@ -32,5 +23,23 @@ namespace Orders_Client.Adapters.Configuration
             return new HttpGatewayConfiguration();
         }
 
+    }
+
+    class OrderServiceConfiguration : ConfigurationElement
+    {
+        [ConfigurationProperty("uri", DefaultValue = "http://127.0.0.1:3476/", IsRequired = true)]
+        public Uri Uri
+        {
+            get { return (Uri)this["uri"]; }
+            set { this["uri"] = value; }
+        }
+
+
+        [ConfigurationProperty("Timeout", DefaultValue = "5000", IsRequired = true)]
+        public string Timeout
+        {
+            get { return this["Timeout"] as string; }
+            set { this["Timeout"] = value; }
+        }
     }
 }

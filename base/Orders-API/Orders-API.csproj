@@ -155,7 +155,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Authorize.bat" />
+    <None Include="Deauthorize.bat" />
     <None Include="packages.config" />
+    <None Include="RunServer.bat" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Adapters\Filters\" />

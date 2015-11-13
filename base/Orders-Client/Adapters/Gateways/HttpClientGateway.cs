@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Cache;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -16,7 +17,7 @@ namespace Orders_Client.Adapters.Gateways
         public HttpClient Client()
         {
             GatewayConfiguration = new HttpGatewayConfiguration();
-            _timeout = Convert.ToDouble(GatewayConfiguration.Timeout);
+            _timeout = Convert.ToDouble(GatewayConfiguration.OrderServiceConfiguration.Timeout);
             _client = new ThreadLocal<HttpClient>(() => CreateClient(_timeout));
             return _client.Value;
         }
@@ -28,6 +29,7 @@ namespace Orders_Client.Adapters.Gateways
             {
                 AllowPipelining = true,
                 AllowAutoRedirect = true,
+                Proxy = new WebProxy("http://localhost:8888", false),
                 CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Revalidate)
             };
             var client = HttpClientFactory.Create(requestHandler);
