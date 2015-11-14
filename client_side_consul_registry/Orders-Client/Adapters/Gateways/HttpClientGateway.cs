@@ -2,6 +2,7 @@
 using System.Net.Cache;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Orders_Client.Adapters.Configuration;
 
 namespace Orders_Client.Adapters.Gateways
 {

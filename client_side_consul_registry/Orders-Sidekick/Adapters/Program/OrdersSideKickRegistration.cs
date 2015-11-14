@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Text;
 using Consul;
 using Orders_Sidekick.Adapters.Configuration;
 
@@ -8,23 +9,47 @@ namespace Orders_Sidekick.Adapters.Program
     class OrdersSideKickRegistration
     {
 
-        public void Register()
+        /// <summary>
+        /// Registers the specified client.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        public void Register(Client client)
         {
-            var client = new Client();
-            
             var gatewayConfiguration = HttpGatewayConfiguration.GetConfiguration();
             foreach (OrderAPIServerElement serverDefinition in gatewayConfiguration.OrderServiceConfiguration.Servers)
             {
                 var registration = new AgentServiceRegistration()
                 {
-                    Name = "orders-api",
-                    Address = serverDefinition.Uri.ToString(),
+                    ID =serverDefinition.Id,
+                    Name = serverDefinition.Name,
+                    Address = serverDefinition.Address.ToString(),
+                    Port = serverDefinition.Port
                 };
 
                 client.Agent.ServiceRegister(registration);
-
-                var services = client.Agent.Services();
             }
         }
+
+        public void DisplayRegisteredServices(Client client)
+        {
+            Console.WriteLine("List of services registred by agent");
+            var services = client.Agent.Services().Response;
+            foreach (var key in services.Keys)
+            {
+                var service = services[key];
+                var serviceDefinition = new StringBuilder();
+                serviceDefinition.AppendLine("Service Definition {");
+                serviceDefinition.AppendFormat("ID: {0}", service.ID);
+                serviceDefinition.AppendLine();
+                serviceDefinition.AppendFormat("Address: {0}", service.Address);
+                serviceDefinition.AppendLine();
+                serviceDefinition.AppendFormat("Port: {0)", service.Port);
+                serviceDefinition.AppendLine("}");
+
+                Console.WriteLine(serviceDefinition);
+            }
+            
+        }
+
     }
 }

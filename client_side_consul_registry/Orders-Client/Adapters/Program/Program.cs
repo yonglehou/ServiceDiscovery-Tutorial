@@ -6,7 +6,6 @@ namespace Orders_Client.Adapters.Program
     {
         static void Main(string[] args)
         {
-             
             Console.WriteLine(new OrdersClientController().Run());
         }
     }
