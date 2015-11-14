@@ -30,7 +30,7 @@ namespace Orders_Client.Adapters.Configuration
     {
         [ConfigurationProperty("servers", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
         [ConfigurationCollection(typeof(OrderAPIServerElement))]
-        public OrderAPIServersElement Connections
+        public OrderAPIServersElement Servers
         {
             get
             {

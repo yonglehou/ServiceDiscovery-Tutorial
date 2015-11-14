@@ -188,7 +188,7 @@
     xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\amd64\*.*" "$(TargetDir)amd64"
     xcopy /s /y "$(TargetDir)*.*" "$(SolutionDir)Deploy\server_one\"
     xcopy /s /y "$(TargetDir)*.*" "$(SolutionDir)Deploy\server_two\"
-    copy /y "$(ProjectDir)App2.config" "$(ProjectDir)Deploy\server_two\Orders-API.exe.config"</PostBuildEvent>
+    copy /y "$(ProjectDir)App2.config" "$(SolutionDir)Deploy\server_two\Orders-API.exe.config"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -12,13 +12,10 @@ namespace Orders_Client.Adapters.Gateways
     {
         public HttpGatewayConfiguration GatewayConfiguration { get; private set; }
         private ThreadLocal<HttpClient> _client;
-        private double _timeout;
 
-        public HttpClient Client()
+        public HttpClient Client(double timeout)
         {
-            GatewayConfiguration = new HttpGatewayConfiguration();
-            _timeout = Convert.ToDouble(GatewayConfiguration.OrderServiceConfiguration.Timeout);
-            _client = new ThreadLocal<HttpClient>(() => CreateClient(_timeout));
+            _client = new ThreadLocal<HttpClient>(() => CreateClient(timeout));
             return _client.Value;
         }
 
