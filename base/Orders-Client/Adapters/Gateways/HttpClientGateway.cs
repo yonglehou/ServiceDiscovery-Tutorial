@@ -29,7 +29,6 @@ namespace Orders_Client.Adapters.Gateways
             {
                 AllowPipelining = true,
                 AllowAutoRedirect = true,
-                Proxy = new WebProxy("http://localhost:8888", false),
                 CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Revalidate)
             };
             var client = HttpClientFactory.Create(requestHandler);

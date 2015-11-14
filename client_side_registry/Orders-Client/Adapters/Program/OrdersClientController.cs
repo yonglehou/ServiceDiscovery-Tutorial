@@ -51,46 +51,32 @@ namespace Orders_Client.Adapters.Program
 
         public string Run()
         {
-            var client = new HttpClientGateway().Client(_currentServer.Timeout);
-            try
+            var result = _retryPolicy.Execute(() =>
             {
-                client.BaseAddress = _currentServer.Uri;
-                var order = new AddOrderModel()
+                using (var client = new HttpClientGateway().Client(_currentServer.Uri, _currentServer.Timeout))
                 {
-                    CustomerName = "Winnie the Pooh",
-                    Description = "Pot of Honey",
-                    DueDate = DateTime.UtcNow.ToString("o")
-                };
-
-                string orderBody;
-                XmlRequestBuilder.TryBuild(order, out orderBody);
-                var requestMessage = CreateRequest("orders", new StringContent(orderBody));
-                var response = client.SendAsync(requestMessage).Result;
-                response.EnsureSuccessStatusCode();
-                return response.Content.ReadAsStringAsync().Result;
-
-            }
-            catch (AggregateException ae)
-            {
-                foreach (var e in ae.Flatten().InnerExceptions)
-                {
-                    Console.Write(e.Message);
-                    if (e.InnerException != null)
-                        Console.WriteLine(" : " + e.InnerException);
-                    else
-                        Console.WriteLine();
-
+                    return PostOrder(client);
                 }
-            }
-            catch (Exception he)
+            });
+            return result;
+        }
+
+        private string PostOrder(HttpClient client)
+        {
+
+            var order = new AddOrderModel()
             {
-                Console.WriteLine("Exception talking to server: {0}", he);
-            }
-            finally
-            {
-                client.Dispose();
-            }
-            return null;
+                CustomerName = "Winnie the Pooh",
+                Description = "Pot of Honey",
+                DueDate = DateTime.UtcNow.ToString("o")
+            };
+
+            string orderBody;
+            XmlRequestBuilder.TryBuild(order, out orderBody);
+            var requestMessage = CreateRequest("orders", new StringContent(orderBody));
+            var response = client.SendAsync(requestMessage).Result;
+            response.EnsureSuccessStatusCode();
+            return response.Content.ReadAsStringAsync().Result;
         }
 
         public HttpRequestMessage CreateRequest(string uri, StringContent content)
@@ -104,7 +90,7 @@ namespace Orders_Client.Adapters.Program
         {
             _currentServer = _serverList[_currentServerIndex];
             _currentServerIndex++;
-            if (_currentServerIndex > _serverList.Count)
+            if (_currentServerIndex > _serverList.Count - 1)
                 _currentServerIndex = 0;
         }
 

@@ -156,10 +156,6 @@
   <ItemGroup>
     <None Include="App2.config" />
     <None Include="App.config" />
-    <None Include="Authorize2.bat" />
-    <None Include="Authorize.bat" />
-    <None Include="Deauthorize2.bat" />
-    <None Include="Deauthorize.bat" />
     <None Include="packages.config" />
     <None Include="RunServer2.bat" />
     <None Include="RunServer.bat" />
