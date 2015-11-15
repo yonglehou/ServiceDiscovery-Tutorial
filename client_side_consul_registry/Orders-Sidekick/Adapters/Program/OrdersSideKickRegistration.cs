@@ -22,7 +22,7 @@ namespace Orders_Sidekick.Adapters.Program
                 {
                     ID =serverDefinition.Id,
                     Name = serverDefinition.Name,
-                    Address = serverDefinition.Address.ToString(),
+                    Address = serverDefinition.Address,
                     Port = serverDefinition.Port,
                     Tags = new []{"Orders"}
                 };

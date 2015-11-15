@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders-Service", "Orders-Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders-Client", "Orders-Client\Orders-Client.csproj", "{F93D24F2-DE91-4509-A65A-CCA0E1E9853C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders-Sidekick", "Orders-Sidekick\Orders-Sidekick.csproj", "{48B45953-CA02-437A-B2DC-767AFE4FB211}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,10 +35,6 @@ Global
 		{F93D24F2-DE91-4509-A65A-CCA0E1E9853C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F93D24F2-DE91-4509-A65A-CCA0E1E9853C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F93D24F2-DE91-4509-A65A-CCA0E1E9853C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{48B45953-CA02-437A-B2DC-767AFE4FB211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{48B45953-CA02-437A-B2DC-767AFE4FB211}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{48B45953-CA02-437A-B2DC-767AFE4FB211}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{48B45953-CA02-437A-B2DC-767AFE4FB211}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
