@@ -55,7 +55,7 @@ namespace Orders_Sidekick.Adapters.Configuration
             set { this["name"] = value; } 
         }
 
-        [ConfigurationProperty("uri", DefaultValue = "http://localhost/", IsRequired = true)]
+        [ConfigurationProperty("uri", DefaultValue = "http://localhost", IsRequired = true)]
         public Uri Address
         {
             get { return (Uri)this["uri"]; }

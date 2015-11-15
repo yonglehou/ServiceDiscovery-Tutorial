@@ -22,7 +22,6 @@ namespace Orders_Client.Adapters.Program
         public OrdersClientController()
         {
             var client = new Client();
-
             var services = client.Agent.Services().Response;
             foreach (var service in services)
             {
@@ -31,8 +30,8 @@ namespace Orders_Client.Adapters.Program
                 {
                     var server = new Server()
                     {
-                        Timeout = 500,
-                        Uri = new Uri(string.Format("{0}:{1}/", service.Value.Address.Substring(0, service.Value.Address.Length-1), service.Value.Port))
+                        Timeout = 5000,
+                        Uri = new Uri(string.Format("{0}:{1}/", service.Value.Address, service.Value.Port))
                     };
                     _serverList.Add(server);
                 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 
-namespace Orders_Client.Adapters.Configuration
+namespace Orders_Sidekick.Adapters.Configuration
 {
     class HttpGatewayConfiguration : ConfigurationSection
     {
@@ -41,13 +41,33 @@ namespace Orders_Client.Adapters.Configuration
 
     public class OrderAPIServerElement : ConfigurationElement
     {
-        [ConfigurationProperty("uri", DefaultValue = "http://127.0.0.1:3476/", IsRequired = true)]
-        public Uri Uri
+        [ConfigurationProperty("id", DefaultValue = "Unknown", IsRequired = true)]
+        public string Id
+        {
+            get { return (string)this["id"]; } 
+            set { this["id"] = value; } 
+        }
+
+        [ConfigurationProperty("name", DefaultValue = "Unknown", IsRequired = true)]
+        public string Name
+        { 
+            get { return (string)this["name"]; } 
+            set { this["name"] = value; } 
+        }
+
+        [ConfigurationProperty("uri", DefaultValue = "http://localhost", IsRequired = true)]
+        public Uri Address
         {
             get { return (Uri)this["uri"]; }
             set { this["uri"] = value; }
         }
 
+        [ConfigurationProperty("port", DefaultValue = 3476, IsRequired = true)]
+        public int Port
+        {
+            get { return Convert.ToInt32(this["port"]); } 
+            set { this["port"] = value; } 
+        }
 
         [ConfigurationProperty("Timeout", DefaultValue = "5000", IsRequired = true)]
         public string Timeout
@@ -78,7 +98,7 @@ namespace Orders_Client.Adapters.Configuration
 
         protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((OrderAPIServerElement)element).Uri;
+            return ((OrderAPIServerElement)element).Id;
         }
     }
 }
