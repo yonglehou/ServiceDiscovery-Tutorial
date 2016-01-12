@@ -1,4 +1,5 @@
 ﻿using System;
+using Consul;
 using Microsoft.Owin.Hosting;
 using Orders_API.Adapters.Configuration;
 using Orders_Core;
@@ -29,6 +30,10 @@ namespace Orders_API.Adapters.Service
 
         public void Shutdown(HostControl hostcontrol)
         {
+            var client = new Client();
+            var configuration = OrderServerConfiguration.GetConfiguration();
+            client.Agent.ServiceDeregister(configuration.Server.Id);
+
             return;
         }
     }
